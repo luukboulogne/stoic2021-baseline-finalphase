@@ -47,7 +47,7 @@ Please note that it is not necessary to include the resulting `STOICTrain.tar.gz
 
 <a id="implementing"></a>
 ## Implementing your own training algorithm
-You can implement your own solution by altering the [`do_learning`](https://github.com/luukboulogne/stoic2021-baseline-finalphase/blob/04ba8783785a001d7aba47730e6f412b8781923b/training/train.py#L76) function in `./train.py`. See the documentation of this function in `./train.py` for more information.
+You can implement your own solution by altering the [`do_learning`](https://github.com/luukboulogne/stoic2021-baseline-finalphase/blob/a9916c6a2a8c075300200e0d0c04dfffe93b0b17/training/train.py#L76) function in `./train.py`. See the documentation of this function in `./train.py` for more information.
 
 Any additional imported packages needed for inference should be added to `./requirements.txt`, and any additional files and folders you add should be explicitly copied in the `./Dockerfile`. See `./requirements.txt` and `./Dockerfile` for examples. After implementing your own algorithm, make sure that your training codebase is ready for submission by [testing](#testing) it.
 
