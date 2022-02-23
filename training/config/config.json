@@ -1,0 +1,7 @@
+{
+  "preprocess_dir": "/tmp/preprocessed/",
+  "num_workers": 4,
+  "lr": 0.0001,
+  "epochs": 100,
+  "batch_size": 2
+}
