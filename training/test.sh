@@ -11,12 +11,12 @@ chmod 777 $SCRIPTPATH/../inference/artifact/
 rm -r $SCRIPTPATH/../inference/artifact/*
 
 # Run the algorithm
-MEMORY="16g"
+MEMORY="108g"
 
 docker run --rm --gpus all \
         --memory=$MEMORY --memory-swap=$MEMORY \
         --cap-drop=ALL --security-opt="no-new-privileges" \
-        --network none --shm-size=128m --pids-limit 256 \
+        --network none --shm-size=20g --pids-limit 256 \
         -v $1:/input/ \
         -v $SCRIPTPATH/../inference/artifact/:/output/ \
         stoictrain
