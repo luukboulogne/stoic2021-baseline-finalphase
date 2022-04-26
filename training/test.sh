@@ -16,7 +16,7 @@ MEMORY="108g"
 docker run --rm --gpus all \
         --memory=$MEMORY --memory-swap=$MEMORY \
         --cap-drop=ALL --security-opt="no-new-privileges" \
-        --network none --shm-size=20g --pids-limit 256 \
+        --network none --shm-size=20g --pids-limit 1024 \
         -v $1:/input/ \
         -v $SCRIPTPATH/../inference/artifact/:/output/ \
         stoictrain
