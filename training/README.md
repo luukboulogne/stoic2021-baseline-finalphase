@@ -17,7 +17,7 @@ Please note that the next step (testing the container) also runs a build, so thi
 
 <a name="testing"></a>
 ### Testing
-To test if the docker container for training works as expected, run the `test.sh`/`test.bat` script as shown below. This script contains the commands that will be used by the organizers to train your algorithm. It should not be altered while preparing your submission.
+To test if the docker container for training works as expected, run the `test.sh`/`test.bat` script as shown below. This script contains the commands that will be used by the organizers to train your algorithm. Changing this script will not affect the commands that the organizers will use to train your algorithm. Please do not alter it while preparing your submission.
 
  `test.sh`/`test.bat` will build the container and train your algorithm with the public training set located in some input directory `/path/to/stoic2021-training/`. In the output directory `../inference/artifact/`, it will produce trained model weights to be used later for generating the inference Docker container.
 
@@ -41,8 +41,8 @@ if you are on Windows.
 If the test runs successfully, you will see you will see `Training completed.`, and your model weights will have been saved to `../inference/artifact/`.
 
 Please note: 
-- `/path/to/stoic2021-training/` will be read-only. Please do not try to write to this directory.
-- The number of CPUs and GPUs available in the training environment are not specified in the docker run command in `test.sh`/`test.bat`. When training your submitted codebase, the organizers will use a docker urn command with an altered `--gpus` flag so that two 35GB GPUs are used, and with the added flag `--cpus=16`.
+- When the challenge organizers train your algorithm, `/path/to/stoic2021-training/` will be read-only. Please do not try to write to this directory.
+- The number of CPUs and GPUs available in the training environment are not specified in the docker run command in `test.sh`/`test.bat`. When training with your submitted codebase, the challenge organizers will use a docker run command with an altered `--gpus` flag so that two 35GB GPUs are used, and with the added flag `--cpus=16`.
 
 <a name="exporting"></a>
 ### Exporting
