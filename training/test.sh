@@ -4,6 +4,15 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 ./build.sh
 
+# make sure that the artifact and scratch folders can be deleted
+read -r -p "I will now recursively delete  $SCRIPTPATH/../inference/artifact/*  and   $2/* . Are you sure you want to continue? (type 'yes')? " CONT
+
+if [ "$CONT" != "yes" ]
+then
+  echo "Aborting."
+  exit 0
+fi
+
 # make sure the artifact and scratch folders are writable
 chmod 777 $SCRIPTPATH/../inference/artifact/
 chmod 777 $2/
