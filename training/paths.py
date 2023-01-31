@@ -1,0 +1,5 @@
+PREPROCESS_INPUT_DIR = "/input/"
+PREPROCESS_OUTPUT_DIR = "/scratch/"
+
+TRAINING_INPUT_DIR = "/scratch/"
+TRAINING_OUTPUT_DIR = "/output/"
