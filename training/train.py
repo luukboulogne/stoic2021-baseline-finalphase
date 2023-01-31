@@ -23,7 +23,7 @@ else:
 
 CONFIGFILE = "/opt/train/config/baseline.json"
 
-def get_datasets(config, data_dir):
+def get_datasets(data_dir):
     image_dir = os.path.join(data_dir, "data/mha/")
     reference_path = os.path.join(data_dir, "metadata/reference.csv")
     df = pd.read_csv(reference_path)
@@ -35,13 +35,13 @@ def get_datasets(config, data_dir):
     data_train = df_train[["x", "y"]].to_dict("records")
     data_valid = df_valid[["x", "y"]].to_dict("records")
 
-    train_ds = CTDataset(data_train, config["preprocess_dir"])
-    valid_ds = CTDataset(data_valid, config["preprocess_dir"])
+    train_ds = CTDataset(data_train)
+    valid_ds = CTDataset(data_valid)
     return train_ds, valid_ds
 
 
 def get_learn(config, data_dir, artifact_dir):
-    train_ds, valid_ds = get_datasets(config, data_dir)
+    train_ds, valid_ds = get_datasets(data_dir)
     train_dl = DataLoader(train_ds, bs=config["batch_size"], num_workers=config["num_workers"],
                           shuffle=True, drop_last=True)
     valid_dl = DataLoader(valid_ds, bs=config["batch_size"], num_workers=config["num_workers"])
@@ -87,6 +87,7 @@ def do_learning(data_dir, artifact_dir):
         are necessary for inference into artifact_dir.
     """
     config = get_config(CONFIGFILE)
+
     learn = get_learn(config, data_dir, artifact_dir)
     train(learn, config)
 

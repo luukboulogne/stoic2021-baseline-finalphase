@@ -1,17 +1,12 @@
-import SimpleITK as sitk
 from torch.utils.data import Dataset
 import torch
 import os
 import numpy as np
 from torchio.transforms import Compose, RandomAffine, RandomNoise
-from algorithm.preprocess import preprocess
-
 
 class CTDataset(Dataset):
-    def __init__(self, data, preprocess_dir, augment=False):
+    def __init__(self, data, augment=False):
         self.data = data
-        self.preprocess_dir = os.path.join(preprocess_dir, "preprocess")
-        os.makedirs(self.preprocess_dir, exist_ok=True)
         if augment:
             self.transform = Compose([
                 RandomAffine(scales=0.1, degrees=15, translation=20),
@@ -23,27 +18,8 @@ class CTDataset(Dataset):
     def __len__(self):
         return len(self.data)
 
-    def get_x_filename(self, idx):
-        return self.data[idx]['x']
-
-    def get_x_filename_preprocessed(self, idx):
-        return os.path.join(self.preprocess_dir, os.path.basename(self.get_x_filename(idx)))
-
-    def is_preprocessed(self, idx):
-        return os.path.isfile(self.get_x_filename_preprocessed(idx))
-
-    def get_x_preprocessed(self, idx):
-        sitk_image = sitk.ReadImage(self.get_x_filename_preprocessed(idx))
-        return sitk.GetArrayFromImage(sitk_image)
-
     def get_x(self, idx):
-        if not self.is_preprocessed(idx):
-            sitk_image = sitk.ReadImage(self.get_x_filename(idx))
-            image = preprocess(sitk_image)
-            sitk_image = sitk.GetImageFromArray(image)
-            sitk.WriteImage(sitk_image, self.get_x_filename_preprocessed(idx), False)
-            print(f"Image {idx} processed.")
-        return self.get_x_preprocessed(idx)
+        return np.load(self.data[idx]['x'])
 
     def get_y(self, idx):
         return np.asarray(self.data[idx]['y']).astype(np.float32)
@@ -61,14 +37,13 @@ if __name__ == "__main__":
     import glob
     import matplotlib.pyplot as plt
 
-    preprocess_dir = sys.argv[1]
-    image_dir = sys.argv[2]
+    image_dir = sys.argv[1]
 
     data = [
         {'x': filename, 'y': [0, 0]}
         for filename in glob.glob(os.path.join(image_dir, "*.mha"))
     ]
-    ctdataset = CTDataset(data, preprocess_dir)
+    ctdataset = CTDataset(data)
 
     steps = 4
     for x, y in ctdataset:
