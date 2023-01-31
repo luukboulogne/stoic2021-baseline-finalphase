@@ -21,14 +21,14 @@ if torch.cuda.is_available():
 else:
     device = 'cpu'
 
-CONFIGFILE = "/opt/train/config/baseline.json"
+CONFIGFILE = "config/baseline.json"
 
 def get_datasets(data_dir):
-    image_dir = os.path.join(data_dir, "data/mha/")
+    image_dir = os.path.join(data_dir, "data/npy/")
     reference_path = os.path.join(data_dir, "metadata/reference.csv")
     df = pd.read_csv(reference_path)
 
-    df["x"] = df.apply(lambda row: os.path.join(image_dir, str(row["PatientID"]) + ".mha"), axis=1)
+    df["x"] = df.apply(lambda row: os.path.join(image_dir, str(row["PatientID"]) + ".npy"), axis=1)
     df["y"] = df.apply(lambda row: [row["probCOVID"], row["probSevere"]], axis=1)
     df_train, df_valid = train_test_split(df, test_size=0.2, random_state=42)
 
