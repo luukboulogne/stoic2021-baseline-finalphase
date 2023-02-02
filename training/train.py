@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import shutil
 from sklearn.model_selection import train_test_split
 from torch.nn import BCEWithLogitsLoss
 from fastai.data.core import DataLoader, DataLoaders
@@ -14,6 +15,8 @@ from metrics import acc_probseverecovid
 from metrics import acc_probcovid
 from metrics import roc_probseverecovid
 from metrics import roc_probcovid
+
+import paths 
 
 import torch
 if torch.cuda.is_available():
@@ -99,3 +102,9 @@ def do_learning(data_dir, artifact_dir):
     
     return artifacts
 
+
+if __name__ == "__main__":
+    print("Copying preprocessed data to /tmp...")
+    shutil.copytree(paths.TRAINING_INPUT_DIR_SAGEMAKER, "/tmp/", dirs_exist_ok=True)
+    print("Copying done.")
+    do_learning("/tmp/", paths.TRAINING_OUTPUT_DIR_SAGEMAKER)

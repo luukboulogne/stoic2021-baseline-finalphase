@@ -33,4 +33,4 @@ def main(in_dir, out_dir):
 
 
 if __name__ == "__main__":
-    main(in_dir=paths.PREPROCESS_INPUT_DIR, out_dir=paths.PREPROCESS_OUTPUT_DIR)
+    main(in_dir=paths.PREPROCESS_INPUT_DIR_SAGEMAKER, out_dir=paths.PREPROCESS_OUTPUT_DIR_SAGEMAKER)
