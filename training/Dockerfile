@@ -27,6 +27,8 @@ COPY --chown=train:train ctdataset.py /opt/train/
 COPY --chown=train:train main.py /opt/train/
 COPY --chown=train:train metrics.py /opt/train/
 COPY --chown=train:train train.py /opt/train/
+COPY --chown=train:train do_preprocess.py /opt/train/
+COPY --chown=train:train paths.py /opt/train/
 COPY --chown=train:train algorithm/ /opt/train/algorithm/
 COPY --chown=train:train config/ /opt/train/config/
 
