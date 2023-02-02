@@ -78,13 +78,8 @@ def main(
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    main(in_dir=paths.PREPROCESS_INPUT_DIR_SAGEMAKER, out_dir=paths.PREPROCESS_OUTPUT_DIR_SAGEMAKER)
-=======
-
     main(
-        in_dir=paths.PREPROCESS_INPUT_DIR,
-        out_dir=paths.PREPROCESS_OUTPUT_DIR,
-        num_workers=16,  # TODO: retrieve this possibly from a config file
+        in_dir=paths.PREPROCESS_INPUT_DIR_SAGEMAKER, 
+        out_dir=paths.PREPROCESS_OUTPUT_DIR_SAGEMAKER,
+        num_workers=16,
     )
->>>>>>> optimize_training

@@ -57,6 +57,7 @@ def get_learn(config, data_dir, artifact_dir):
         AccumMetric(acc_probseverecovid, flatten=False),
         AccumMetric(roc_probseverecovid, flatten=False)
     ]
+    metrics = [] # This line is here for debugging purposes
 
     return Learner(DataLoaders(train_dl, valid_dl),
                    model=model,

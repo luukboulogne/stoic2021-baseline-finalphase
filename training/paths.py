@@ -1,14 +1,22 @@
 import os
+from pathlib import Path
 
-PREPROCESS_INPUT_DIR = "/input/"
-PREPROCESS_OUTPUT_DIR = "/scratch/"
+def get_path_from_env(path):
+    path = os.getenv(path)
+    if path is None:
+        return None
+    else:
+        return Path(path)
 
-TRAINING_INPUT_DIR = "/scratch/"
-TRAINING_OUTPUT_DIR = "/output/"
+PREPROCESS_INPUT_DIR = Path("/input/")
+PREPROCESS_OUTPUT_DIR = Path("/scratch/")
+
+TRAINING_INPUT_DIR = Path("/scratch/")
+TRAINING_OUTPUT_DIR = Path("/output/")
 
 
-PREPROCESS_INPUT_DIR_SAGEMAKER = os.getenv('SM_CHANNEL_DATASET')
-PREPROCESS_OUTPUT_DIR_SAGEMAKER = '/preprocessed/'
+PREPROCESS_INPUT_DIR_SAGEMAKER = get_path_from_env('SM_CHANNEL_DATASET')
+PREPROCESS_OUTPUT_DIR_SAGEMAKER = Path('/preprocessed/')
 
-TRAINING_INPUT_DIR_SAGEMAKER = os.getenv('SM_CHANNEL_PREPROCESSED')
-TRAINING_OUTPUT_DIR_SAGEMAKER = "/artifact/"
+TRAINING_INPUT_DIR_SAGEMAKER = get_path_from_env('SM_CHANNEL_PREPROCESSED')
+TRAINING_OUTPUT_DIR_SAGEMAKER = Path("/artifact/")
