@@ -50,6 +50,10 @@ def main(
         num_workers (int, optional): Number of parallel works to initiate. Defaults to 1.
     """
 
+    # if the arguments are str, just in case
+    in_dir = Path(in_dir)
+    out_dir = Path(in_dir)
+
     # create output directories for storing numpy files
     output_image_dir = out_dir / "data" / "npy"
     output_image_dir.mkdir(exist_ok=True, parents=True)
@@ -80,7 +84,7 @@ def main(
 if __name__ == "__main__":
 
     main(
-        in_dir=paths.PREPROCESS_INPUT_DIR,
-        out_dir=paths.PREPROCESS_OUTPUT_DIR,
+        in_dir=Path(paths.PREPROCESS_INPUT_DIR),
+        out_dir=Path(paths.PREPROCESS_OUTPUT_DIR),
         num_workers=16,  # TODO: retrieve this possibly from a config file
     )
